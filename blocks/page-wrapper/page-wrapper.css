@@ -4,3 +4,13 @@
   display: block;
   max-width: 880px;
 }
+@media screen and (max-width: 934px) {
+  .page-wrapper {
+    margin: 0px 19px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .page-wrapper {
+    margin: 0px auto;
+  }
+}
