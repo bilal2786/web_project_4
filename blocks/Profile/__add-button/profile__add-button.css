@@ -10,6 +10,13 @@
   height: 50px;
   padding: 0px;
 }
+.profile__add-button {
+  transition: opacity 0.5s linear;
+}
+.profile__add-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
 @media screen and (max-width: 840px) {
   .profile__add-button {
     margin-left: 90px;
