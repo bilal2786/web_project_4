@@ -1,0 +1,8 @@
+.logo_place_popup {
+  width: 60px;
+}
+@media screen and (max-width: 520px) {
+  .logo_place_popup {
+    width: 40px;
+  }
+}
