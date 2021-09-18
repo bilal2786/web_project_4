@@ -46,7 +46,7 @@
 
 ---
 
-link to the project --->
+link to the project ---> https://eduard-l.github.io/web_project_4/
 
 ---
 
