@@ -1,7 +1,12 @@
 .profile__info {
-  margin-left: 30px;
+  margin-left: 34px;
   position: relative;
-  min-width: 415px;
+  max-width: 415px;
+  display: grid;
+  grid-template-columns: 373px auto;
+  grid-column-gap: 18px;
+  grid-row-gap: 16px;
+  align-items: center;
 }
 @media screen and (max-width: 840px) {
   .profile__info {
@@ -10,13 +15,16 @@
 }
 @media screen and (max-width: 670px) {
   .profile__info {
-    margin-left: 0px;
+    margin-left: 34px;
     margin-top: 30px;
     text-align: center;
+    grid-column-gap: 10px;
+    grid-row-gap: 14px;
   }
 }
 @media screen and (max-width: 470px) {
   .profile__info {
-    min-width: 282px;
+    grid-template-columns: 196px auto;
+    margin-left: 27.5px;
   }
 }

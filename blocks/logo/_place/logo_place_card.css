@@ -1,7 +1,0 @@
-.logo_place_card {
-  transition: opacity 0.5s linear;
-}
-.logo_place_card:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
