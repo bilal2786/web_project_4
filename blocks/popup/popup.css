@@ -8,6 +8,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  visibility: visible;
+  visibility: hidden;
   display: flex;
+  opacity: 0;
+  transition: visibility 2s, opacity 2s;
 }

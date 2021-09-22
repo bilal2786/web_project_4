@@ -11,7 +11,7 @@ let saveButton = document.querySelector(".popup__save-button");
 
 
 function ShowPopup() {
-    popup.classList.remove(`popup_hidden`);
+    popup.classList.add(`popup_visible`);
     inputName.value = profileName.textContent;
     inputDescription.value = profileDescription.textContent;
 
@@ -20,7 +20,7 @@ editButton.addEventListener('click', ShowPopup);
 
 function ClosePopup() {
 
-    popup.classList.add(`popup_hidden`);
+    popup.classList.remove(`popup_visible`);
 
 }
 closeButton.addEventListener('click', ClosePopup);
