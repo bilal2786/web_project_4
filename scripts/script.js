@@ -8,6 +8,7 @@ let profileDescription = document.querySelector(".profile__description");
 let inputName = document.querySelector(".popup__input_type_name");
 let inputDescription = document.querySelector(".popup__input_type_description");
 let saveButton = document.querySelector(".popup__save-button");
+let button = document.querySelectorAll(".card__button");
 
 
 function ShowPopup() {
@@ -34,3 +35,10 @@ function SaveInfo(event) {
     ClosePopup();
 }
 popup.addEventListener('submit', SaveInfo);
+
+for (let i=0; i<button.length; i++){
+button[i].addEventListener('click',() =>{
+    button[i].classList.toggle(`card__button_black`)
+});
+
+}
