@@ -1,0 +1,9 @@
+.popup__icon_type_zoom-image {
+    width: 58px;
+}
+
+@media screen and (max-width:520px) {
+    .popup__icon_type_zoom-image {
+        width: 44px;
+    }
+}

@@ -33,8 +33,10 @@
 - Form
 - Calc function
 - Interactiveness:
-  - The user can edit his profile info by clicking at "edit button" & the form will popup at the center of the screen!
-  - After the user have filled his info he can save it by clicking at the "save button" and the info will apeared at the screen!
+  - The user can edit his profile info by clicking "Edit" button & save his info 
+  - The user can make like to the photo by clicking the "Like" button
+  - The user can add cards by insert title & url of the photo !
+  - The user can delete cards by cliking the "delete" button !  
 
 ---
 
