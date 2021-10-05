@@ -54,6 +54,7 @@ function submitAddCardForm(event) { ////function for adding new card
     event.preventDefault();
     const cardElement= createCard({ name: inputCardTitle.value, link: inputUrl.value });
     cardsSection.prepend(cardElement);
+    closePopup(popupTypeAddCard);
 }
 popupTypeAddCard.addEventListener("submit", submitAddCardForm);
 
