@@ -70,28 +70,29 @@ function fillEditProfileForm() { /// the function takes the text value from user
     inputDescription.value = profileDescription.textContent;
 
 }
-function closePopupWithEscKey(evt, popup){
+function closePopupWithEscKey(evt){
     if (evt.key==="Escape"){
-        closePopup(popup);
+        
+        closePopup(document.querySelector('.popup_visible'));
     }
 }
-function closePopupByClickOutsideThePopup (evt,popup){
+function closePopupByClickOutsideThePopup (evt){
     if (evt.target.classList.contains(`popup_visible`)){
-        closePopup(popup);
+        closePopup(evt.target);
     }
 }
 
 function showPopup(popup) {
     popup.classList.add(`popup_visible`);
-    document.addEventListener('keydown',(evt)=> closePopupWithEscKey(evt,popup));
-    document.addEventListener('mousedown',(evt)=>closePopupByClickOutsideThePopup(evt,popup));
+    document.addEventListener('keydown',closePopupWithEscKey);
+    document.addEventListener('mousedown',closePopupByClickOutsideThePopup);
 }
 
 function closePopup(popup) {
 
     popup.classList.remove(`popup_visible`);
-    document.removeEventListener('keydown',(evt)=> closePopupWithEscKey(evt,popup));
-    document.removeEventListener('mousedown',(evt)=>closePopupByClickOutsideThePopup(evt,popup));
+    document.removeEventListener('keydown',  closePopupWithEscKey);
+    document.removeEventListener('mousedown',closePopupByClickOutsideThePopup);
 
 
 }
@@ -121,9 +122,7 @@ addButton.addEventListener('click', () => {
     
 });
 closeButtonAddCard.addEventListener('click', () => closePopup(popupTypeAddCard));
-closePopupImageBtn.addEventListener('click', () => {
-    closePopup(popupImage);
-});
+closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
 
 
