@@ -36,15 +36,16 @@
   - The user can edit his profile info by clicking "Edit" button & save his info 
   - The user can make like to the photo by clicking the "Like" button
   - The user can add cards by insert title & url of the photo !
-  - The user can delete cards by cliking the "delete" button !  
+  - The user can delete cards by cliking the "delete" button ! 
+-Popup form Features:
+  -The popup can be closed by clicking outside of it or "Escape" key press! 
+  - All the forms checking for the validation and inform the  user about it with default messages! (done with pure JS)   
 
 ---
 
 ## Future features
-
-- Adding images
 - Editing profile photo
-- The user could add "Like" to Image
+
 
 ---
 

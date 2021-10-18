@@ -18,11 +18,11 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 765px) {
+/*@media screen and (max-width: 765px) {
   .profile__add-button {
     margin-left: 15px;
   }
-}
+}*/
 @media screen and (max-width: 670px) {
   .profile__add-button {
     margin-left: 0px;

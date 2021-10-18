@@ -19,37 +19,37 @@ const cardImage = document.querySelector(".popup__image");
 const closePopupImageBtn = popupImage.querySelector(".popup__close-button");
 
 function createCard(cardInfo) { // card description + card img url // function for upload cards 
-   const cardTemplate = elementTemplate.querySelector(".card").cloneNode(true);
- const templateImge=cardTemplate.querySelector(".card__image");
-   cardTemplate.querySelector(".card__title").textContent = cardInfo.name;
-   templateImge.src= cardInfo.link;
-   cardTemplate.querySelector(".card__image").alt = cardInfo.name;
-    const cardButton = cardTemplate.querySelector(".card__button"); 
- cardButton.addEventListener('click', (evt) => {  /// func for all like buttons !
- evt.target.classList.toggle(`card__button_black`);
- });
-  const deleteButton = cardTemplate.querySelector(".card__delete-button");
+const cardTemplate = elementTemplate.querySelector(".card").cloneNode(true);
+const templateImge=cardTemplate.querySelector(".card__image");
+cardTemplate.querySelector(".card__title").textContent = cardInfo.name;
+const templateImg=cardTemplate.querySelector(".card__image");
+templateImge.src= cardInfo.link;
+templateImg.alt = cardInfo.name; 
+const cardButton = cardTemplate.querySelector(".card__button"); 
+cardButton.addEventListener('click', (evt) => {  /// func for all like buttons !
+evt.target.classList.toggle(`card__button_black`);
+});
+const deleteButton = cardTemplate.querySelector(".card__delete-button");
 
- deleteButton.addEventListener('click', (evt) => {/// deleting cars func !
+deleteButton.addEventListener('click', (evt) => {/// deleting cars func !
 
-  cardTemplate.remove();
+cardTemplate.remove();
 
-  });
-   cardTemplate.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 
-  showPopup(popupImage);
-  popupFigure.textContent = cardTemplate.querySelector(".card__title").textContent;
-  cardImage.src = cardTemplate.querySelector(".card__image").src;
-  cardImage.alt=cardTemplate.querySelector(".card__title").textContent;
+});
+cardTemplate.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 
+showPopup(popupImage);
+popupFigure.textContent = cardInfo.name;
+cardImage.src = cardInfo.link;
+cardImage.alt=cardInfo.name;
 
-  });
+});
 
-
-   return cardTemplate;
+return cardTemplate;
 
 }
 
 initialCards.forEach(cardInfo => {
-   cardsSection.append(createCard(cardInfo));
+cardsSection.append(createCard(cardInfo));
 })
 
 function submitAddCardForm(event) { ////function for adding new card
@@ -73,17 +73,19 @@ function showPopup(popup) {
     popup.classList.add(`popup_visible`);
 
 }
-editButton.addEventListener('click', () => {
-    showPopup(popupTypeEditProfile);
-    openEditProfileForm();
-
-});
-
 function closePopup(popup) {
 
     popup.classList.remove(`popup_visible`);
 
 }
+editButton.addEventListener('click', () => {
+    showPopup(popupTypeEditProfile);
+    openEditProfileForm();
+    enableValidation(pageSettings);
+    
+});
+
+
 closeEditProfilePopupBtn.addEventListener('click', () => { closePopup(popupTypeEditProfile) });
 
 
@@ -95,6 +97,26 @@ function saveUserInfo(event) {
 }
 popupTypeEditProfile.addEventListener('submit', saveUserInfo);
 
-addButton.addEventListener('click', () => showPopup(popupTypeAddCard));
+addButton.addEventListener('click', () => {showPopup(popupTypeAddCard); });
 closeButtonAddCard.addEventListener('click', () => closePopup(popupTypeAddCard));
 closePopupImageBtn.addEventListener('click', () => { closePopup(popupImage); });
+
+
+document.addEventListener("keydown", (evt)=> {
+   if (evt.key==="Escape"){
+       Array.from(document.querySelectorAll('.popup')).forEach((popup)=>closePopup(popup));
+   }
+    
+})
+const allPopupsArray=Array.from(document.querySelectorAll(".popup"));
+allPopupsArray.forEach((popup)=>popup.addEventListener('click', (evt)=>{
+    if (evt.target.classList.contains("popup")){
+         closePopup(popup) 
+    }
+    }))
+
+// popupTypeEditProfile.addEventListener("keydown", (evt)=>{
+//     if (evt.key==="Escape"){
+//         closePopup(popupTypeEditProfile);
+//     }
+// })

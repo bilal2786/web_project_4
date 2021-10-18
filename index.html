@@ -1,99 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project_4_Around_The_US</title>
     <link rel="stylesheet" href="./pages/index.css" />
-</head>
+  </head>
 
-<body class="body">
+  <body class="body">
     <div class="page-wrapper">
-        <header class="header">
-            <img src="./images/logo1.svg" alt="pic of logo" class="header__logo" />
-        </header>
-        <main class="main">
-            <section class="profile">
-                <img src="./images/profile__photo.jpg" alt="photo of the profile" class="profile__photo" />
-                <div class="profile__info">
-                    <h1 class="profile__name">Jacques Cousteau</h1>
-                    <button class="profile__edit-button" type="button">
+      <header class="header">
+        <img src="./images/logo1.svg" alt="pic of logo" class="header__logo" />
+      </header>
+      <main class="main">
+        <section class="profile">
+          <img
+            src="./images/spartna__image.jpg"
+            alt="photo of the profile"
+            class="profile__photo"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">Spartan</h1>
+            <button class="profile__edit-button" type="button">
               <img
                 src="./images/logo__button.svg"
                 alt="logo of the button"
                 class="profile__icon-edit-button"
               />
             </button>
-                    <p class="profile__description">Explorer</p>
-                </div>
-                <button class="profile__add-button" type="button">
+            <p class="profile__description">Warrior</p>
+          </div>
+          <button class="profile__add-button" type="button">
             <img
               src="./images/Add__button.svg"
               alt="button of adding info"
               class="profile__icon-add-button"
             />
           </button>
-            </section>
-            <section class="cards"></section>
-        </main>
+        </section>
+        <section class="cards"></section>
+      </main>
 
-        <footer class="footer">
-            <p class="footer__title">© 2021 Around The U.S.</p>
-        </footer>
-        <div class="popup popup_type_edit-profile">
-            <div class="popup__content">
-                <h2 class="popup__title">Edit profile</h2>
-                <form class="popup__form" name="user_info">
-                    <label for="name" class="popup__label"></label>
-                    <input type="text" id="name" class="popup__input popup__input_type_name" name="user_name" />
-                    <label for="desription" class="popup__label"></label>
-                    <input type="text" id="desription" class="popup__input popup__input_type_description" name="user_description" />
-                    <button class="popup__save-button" type="submit">Save</button>
-                </form>
-                <button class="popup__close-button" type="button">
+      <footer class="footer">
+        <p class="footer__title">© 2021 Around The U.S.</p>
+      </footer>
+      <div class="popup popup_type_edit-profile">
+        <div class="popup__content">
+          <h2 class="popup__title">Edit profile</h2>
+          <form class="popup__form" name="user_info">
+            <label for="input_type_name" class="popup__label"></label>
+            <input
+              type="text"
+              id="input_type_name"
+              class="popup__input popup__input_type_name"
+              name="user_name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span id="input_type_name-error" class="popup__error"></span>
+            <label for="input_type_description" class="popup__label"></label>
+            <input
+              type="text"
+              id="input_type_description"
+              class="popup__input popup__input_type_description"
+              name="user_description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span id="input_type_description-error" class="popup__error"></span>
+            <button class="popup__save-button" type="submit">Save</button>
+          </form>
+          <button class="popup__close-button" type="button">
             <img
               src="./images/Close__button.svg"
               alt="button for close the form"
               class="popup__icon"
             />
           </button>
-            </div>
         </div>
-        <div class="popup popup_type_add-card">
-            <div class="popup__content">
-                <h2 class="popup__title">New Place</h2>
-                <form class="popup__form" name="user_info">
-                    <label for="title" class="popup__label"></label>
-                    <input type="text" id="title" class="popup__input popup__input_type_title" name="title__card" placeholder="Title" />
-                    <label for="url" class="popup__label"></label>
-                    <input type="text" id="url" class="popup__input popup__input_type_url" name="image__url" placeholder="Image URL" />
-                    <button class="popup__save-button" type="submit">Save</button>
-                </form>
-                <button class="popup__close-button" type="button">
+      </div>
+      <div class="popup popup_type_add-card">
+        <div class="popup__content">
+          <h2 class="popup__title">New Place</h2>
+          <form class="popup__form" name="new__place">
+            <label for="input_type_title" class="popup__label"></label>
+            <input
+              type="text"
+              id="input_type_title"
+              class="popup__input popup__input_type_title"
+              name="title__card"
+              placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+            <span id="input_type_title-error" class="popup__error"></span>
+            <label for="input_type_url" class="popup__label"></label>
+            <input
+              type="url"
+              id="input_type_url"
+              class="popup__input popup__input_type_url"
+              name="image__url"
+              placeholder="Image URL"
+              required
+            />
+            <span id="input_type_url-error" class="popup__error"></span>
+            <button class="popup__save-button" type="submit">Save</button>
+          </form>
+          <button class="popup__close-button" type="button">
             <img
               src="./images/Close__button.svg"
               alt="button for close the form"
               class="popup__icon"
             />
           </button>
-            </div>
         </div>
+      </div>
     </div>
     <div class="popup popup_type_zoom-image">
-        <div class="popup__content-wrapper">
-            <img src="#" alt="image preview" class="popup__image" />
-            <figure class="popup__figure"></figure>
+      <div class="popup__content-wrapper">
+        <img src="#" alt="image preview" class="popup__image" />
+        <figure class="popup__figure"></figure>
 
-            <button class="popup__close-button popup__close-button_type_zoom-image" type="button">
+        <button
+          class="popup__close-button popup__close-button_type_zoom-image"
+          type="button"
+        >
           <img
             src="./images/Close__button.svg"
             alt="button for close the form"
             class="popup__icon popup__icon_type_zoom-image"
           />
         </button>
-        </div>
+      </div>
     </div>
     <template id="template">
       <article class="card">
@@ -111,8 +153,8 @@
         </div>
       </article>
     </template>
-    <script src="./scripts/intial-cards.js"></script>
-    <script src="./scripts/script.js"></script>
-</body>
-
+    <script src="scripts/validate.js" defer></script>
+    <script src="./scripts/intial-cards.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
+  </body>
 </html>

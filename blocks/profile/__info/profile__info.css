@@ -3,7 +3,7 @@
   position: relative;
   max-width: 415px;
   display: grid;
-  grid-template-columns: 373px auto;
+  grid-template-columns: auto auto;
   grid-column-gap: 18px;
   grid-row-gap: 16px;
   align-items: center;
