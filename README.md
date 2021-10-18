@@ -1,4 +1,4 @@
-# Project 4: Around The U.S.
+# Project 6: Around The U.S.
 
 ## The project describes a sort of social media profile !
 
