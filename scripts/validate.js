@@ -35,7 +35,7 @@ function checkInputValidity(formElement, inputElement, pageSettings) {
 }
 
 function hasInvalidInput(inputList) {
-     return inputList.some((inputElement) => {
+    return inputList.some((inputElement) => {
         return !inputElement.validity.valid
     });
 }
@@ -52,7 +52,7 @@ function toggleButtonState(inputList, buttonElement, pageSettings) {
 function setEventListeners(formElement, pageSettings) {
     const inputList = Array.from(formElement.querySelectorAll(pageSettings.inputSelector)); //find all inputs in our page and creating an array !
     const buttonElement = formElement.querySelector(pageSettings.submitButtonSelector); // find all symbit button in our page & creating array ! 
-    toggleButtonState(inputList, buttonElement, pageSettings); // takes 
+    toggleButtonState(inputList, buttonElement, pageSettings);  
     inputList.forEach((inputElement) => {
         inputElement.addEventListener("input", () => { //for all input element add event and check validity & toggle button according the validity 
             checkInputValidity(formElement, inputElement, pageSettings);
@@ -67,11 +67,16 @@ function enableValidation(pageSettings) {
     const formList = Array.from(document.querySelectorAll(pageSettings.formSelector)); //find all forms and creating an Array 
     formList.forEach((formElement) => {
         formElement.addEventListener("submit", (evt) => {
-            evt.preventDefault();
-        }); // for each for element  prevent refresh at the submit event ! 
-        setEventListeners(formElement, pageSettings)
-    }); // and for each form activate function setEventListeners
+            evt.preventDefault();//// for each for element  prevent refresh at the submit event !
+        });  
+        setEventListeners(formElement, pageSettings)//// and for each form activate function setEventListeners
+    }); 
 }
-
-
 enableValidation(pageSettings);
+
+function resetPopupandPopupValidation (pageSettings){
+    const popupList=document.querySelectorAll(pageSettings.formSelector);
+    const inputList= document.querySelectorAll(pageSettings.inputSelector);
+    [...popupList].forEach((popup)=>popup.reset());
+    [...inputList].forEach((inputElement)=>hideInputError(inputElement.closest(pageSettings.formSelector), inputElement, pageSettings))
+}

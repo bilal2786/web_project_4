@@ -60,7 +60,8 @@ function submitAddCardForm(event) { ////function for adding new card
     });
     cardsSection.prepend(cardElement);
     closePopup(popupTypeAddCard);
-    document.querySelector(".popup__form_type_add-card").reset();
+    toggleCardFormBtn();
+    
 
 }
 popupTypeAddCard.addEventListener("submit", submitAddCardForm);
@@ -93,8 +94,10 @@ function closePopup(popup) {
     popup.classList.remove(`popup_visible`);
     document.removeEventListener('keydown',  closePopupWithEscKey);
     document.removeEventListener('mousedown',closePopupByClickOutsideThePopup);
-
-
+    resetPopupandPopupValidation (pageSettings);
+    toggleCardFormBtn();
+    
+    
 }
 editButton.addEventListener('click', () => {
     showPopup(popupTypeEditProfile);
@@ -102,12 +105,6 @@ editButton.addEventListener('click', () => {
     enableValidation(pageSettings);
 
 });
-
-
-closeEditProfilePopupBtn.addEventListener('click', () => {
-    closePopup(popupTypeEditProfile)
-});
-
 
 function saveUserInfo(event) {
     event.preventDefault();
@@ -121,11 +118,14 @@ addButton.addEventListener('click', () => {
     showPopup(popupTypeAddCard);
     
 });
-closeButtonAddCard.addEventListener('click', () => closePopup(popupTypeAddCard));
-closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
-
-
-
-
+const allPopups=document.querySelectorAll(".popup"); // insteaf of making 3 event for buttons we can make it with the array&for each method ! 
+Array.from(allPopups).forEach((popup)=>{
+    popup.querySelector(".popup__close-button").addEventListener('click',()=> closePopup(popup));  
+}
+);
+function toggleCardFormBtn(){ /// func that disabled the add card Button 
+    const submitButton=popupTypeAddCard.querySelector('.popup__save-button');
+    submitButton.classList.add(pageSettings.inactiveButtonClass);
+}
 
