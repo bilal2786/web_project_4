@@ -1,4 +1,4 @@
-# Project 6: Around The U.S.
+# Project 7: Around The U.S.
 
 ## The project describes a sort of social media profile !
 
@@ -39,7 +39,9 @@
   - The user can delete cards by cliking the "delete" button ! 
 -Popup form Features:
   -The popup can be closed by clicking outside of it or "Escape" key press! 
-  - All the forms checking for the validation and inform the  user about it with default messages! (done with pure JS)   
+  - All the forms checking for the validation and inform the  user about it with default messages! (done with pure JS).
+-  The project is organized according to Object-Oriented programming.
+- The project includes module scripts
 
 ---
 
