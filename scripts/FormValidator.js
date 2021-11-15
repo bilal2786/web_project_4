@@ -56,6 +56,14 @@ class FormValidator {
         })
 
     }
+    resetValidation() { /// form reseting and hide validation messages
+        this._inputList=[...this._formElement.querySelectorAll(this._inputSelector)];
+        this._buttonElement=this._formElement.querySelector(this._submitButtonSelector);
+        this._toggleButtonState(this._inputList,this._buttonElement);
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement) 
+        });
+      }
     enableValidation(){
         this._formElement.addEventListener("submit", (evt) => {
             evt.preventDefault();

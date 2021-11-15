@@ -1,4 +1,4 @@
-import { showPopup,popupFigure,cardImage  } from "./script.js";
+import { showPopup,popupFigure,cardImage,imgPopup  } from "./script.js";
 export default class Card {
     constructor(data, templateElement){
         this._name=data.name;
@@ -22,7 +22,7 @@ export default class Card {
     
         }); 
         this._cardElement.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 
-            showPopup(document.querySelector('.popup_type_zoom-image'))
+            showPopup(imgPopup);
             popupFigure.textContent = this._name;
             cardImage.src = this._link;
             cardImage.alt = this._name;

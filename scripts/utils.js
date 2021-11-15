@@ -1,21 +1,20 @@
 export {closePopup,showPopup }
-import { formReseting,popupTypeAddCard,popupTypeEditProfile,fillEditProfileForm } from "./script.js";
+import { popupTypeAddCard,popupTypeEditProfile,editUserFormValidator,fillEditProfileForm,resetAndValidateAddCardForm} from "./script.js";
 const addButton = document.querySelector(".profile__add-button");
 const editButton = document.querySelector(".profile__edit-button");
 function closePopup(popup) {
 
     popup.classList.remove(`popup_visible`);
     document.removeEventListener('keydown',  closePopupWithEscKey);
-    document.removeEventListener('mousedown',closePopupByClickOutsideThePopup);
-    if (popup.querySelector('.popup__form')){/// condition for having form in the popup 
-        formReseting(popup);
-    }
-     
+    document.removeEventListener('mousedown',closePopupByClickOutsideThePopup); 
+    
 }
+
 function closePopupWithEscKey(evt){
     if (evt.key==="Escape"){
         
         closePopup(document.querySelector('.popup_visible'));
+        
     }
 }
 function closePopupByClickOutsideThePopup (evt){
@@ -32,10 +31,12 @@ function showPopup(popup) {
 editButton.addEventListener('click', () => {
     showPopup(popupTypeEditProfile);
     fillEditProfileForm();
-    
+    editUserFormValidator.resetValidation();
 });
 addButton.addEventListener('click', () => {
     showPopup(popupTypeAddCard);
+    resetAndValidateAddCardForm();
+    
     
 });
 const allPopups=document.querySelectorAll(".popup"); // events for close buttons 

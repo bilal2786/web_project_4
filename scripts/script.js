@@ -14,7 +14,10 @@ const elementTemplate = document.querySelector("#template").content; ///template
 const cardsSection = document.querySelector(".cards"); // cards section 
 const popupFigure = document.querySelector(".popup__figure");
 const cardImage = document.querySelector(".popup__image");
-const formSelector=".popup__form";
+const imgPopup=document.querySelector('.popup_type_zoom-image');
+const formTypeEditProfile=popupTypeEditProfile.querySelector('.popup__form');
+const formtypeAddCard=popupTypeAddCard.querySelector('.popup__form');
+//const formSelector=".popup__form";
 const pageSettings = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__save-button",
@@ -22,17 +25,20 @@ const pageSettings = {
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible"
 }
+function createCard(cardInfo){
+   return new Card(cardInfo,elementTemplate).creatingCard();
+}
 
-initialCards.forEach((cardInfo)=>{// stay in script 
-const newCard=new Card(cardInfo,elementTemplate).creatingCard();
+initialCards.forEach((cardInfo)=>{ 
+const newCard=createCard(cardInfo);
 cardsSection.append(newCard);
 })
 function submitAddCardForm(event) { ////function for adding new card 
     event.preventDefault();
-    const cardElement = new Card({
+    const cardElement = createCard({
         name: inputCardTitle.value,
         link: inputUrl.value
-    }, elementTemplate).creatingCard();
+    });
     cardsSection.prepend(cardElement);
     closePopup(popupTypeAddCard);
 }
@@ -49,21 +55,23 @@ function saveUserInfo(event) {
     profileName.textContent = inputName.value;
     profileDescription.textContent = inputDescription.value;
     closePopup(popupTypeEditProfile);
+    resetAndValidateProfileInfo();
+    
 }
 popupTypeEditProfile.addEventListener('submit', saveUserInfo);
 
-function formReseting(popup){ /// form reseting and hide validation messages
-    const popupForm=popup.querySelector(".popup__form");
-    popupForm.reset();
-    const formValidator=new FormValidator(pageSettings,popup);
-    formValidator.enableValidation();
-    [...popup.querySelectorAll(pageSettings.inputSelector)].forEach((input)=>formValidator._hideInputError(input))/// hide error validation after reset the form 
-
+function resetAndValidateAddCardForm(){
+    formtypeAddCard.reset();
+    addCardFormValidator.resetValidation();
+}
+function resetAndValidateProfileInfo(){
+    formTypeEditProfile.reset();
+    editUserFormValidator.resetValidation();
 }
 
-const formList =document.querySelectorAll(formSelector);
-formList.forEach((form)=>{
-    const formValidator=new FormValidator(pageSettings,form);
-    formValidator.enableValidation();
-} )
-export {showPopup, popupFigure, cardImage,formReseting,popupTypeAddCard,popupTypeEditProfile,fillEditProfileForm};
+
+const editUserFormValidator=new FormValidator(pageSettings,formTypeEditProfile);
+editUserFormValidator.enableValidation();
+const addCardFormValidator= new FormValidator(pageSettings,formtypeAddCard);
+addCardFormValidator.enableValidation();
+export {showPopup,editUserFormValidator, popupFigure, cardImage,popupTypeAddCard,popupTypeEditProfile,fillEditProfileForm,imgPopup,resetAndValidateAddCardForm, resetAndValidateProfileInfo};
