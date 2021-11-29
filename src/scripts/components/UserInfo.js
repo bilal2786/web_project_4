@@ -1,18 +1,20 @@
-import {profileName,profileDescription} from '../script.js'
+import { profileName, profileDescription } from '../script.js'
 export default class UserInfo {
-    constructor ({nameSelector , jobSelector}){
-        
-        this._nameSelector=nameSelector;
-        this._jobSelector=jobSelector;
-        
+    constructor({ profileName, profileDescription }) {
+
+        this._profileName = profileName;
+        this._profileDescription = profileDescription;
+
     }
-    getUserInfo(){
-        const infoAboutUser={name:profileName.textContent , job:profileDescription.textContent}
+
+    getUserInfo() {
+        const infoAboutUser = { name: profileName.textContent, description: profileDescription.textContent }
         return infoAboutUser
     }
-    setUserInfo(){
-        profileName.textContent = this._nameSelector.value;
-        profileDescription.textContent = this._jobSelector.value;
+
+    setUserInfo({ name, description }) {
+        profileName.textContent = name;
+        profileDescription.textContent = description;
     }
 
 }
