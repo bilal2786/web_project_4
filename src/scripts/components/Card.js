@@ -1,10 +1,15 @@
-import { showPopup,popupFigure,cardImage,imgPopup  } from "./script.js";
+import { popupFigure,cardImage  } from "../script.js";
+
 export default class Card {
-    constructor(data, templateElement){
+    constructor(data, templateElement,onImageClick){
         this._name=data.name;
         this._link=data.link;
         this._templateElement=templateElement;
+        this._onImageClick=onImageClick;
         
+    }
+    _handlePreviewImage(){
+        this._onImageClick({link:this._link, name:this._name});
     }
     
     _setEventListeners(){
@@ -22,10 +27,8 @@ export default class Card {
     
         }); 
         this._cardElement.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 
-            showPopup(imgPopup);
-            popupFigure.textContent = this._name;
-            cardImage.src = this._link;
-            cardImage.alt = this._name;
+           
+            this._handlePreviewImage();
     
         });
     }
