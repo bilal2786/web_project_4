@@ -103,7 +103,7 @@ function fillEditProfileForm() { /// the function takes the text value from user
 
 }
 
-const infoAboutUser = new UserInfo({ profileName: profileName.textContent, profileDescription: profileDescription.textContent }); /// instance with the UserInfo
+const infoAboutUser = new UserInfo({ profileName, profileDescription }); /// instance with the UserInfo
 function saveUserInfo(event) {
     event.preventDefault();
     infoAboutUser.setUserInfo({ name: inputName.value, description: inputDescription.value });
@@ -121,7 +121,6 @@ const editUserFormValidator = new FormValidator(pageSettings, formTypeEditProfil
 editUserFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(pageSettings, formtypeAddCard);
 addCardFormValidator.enableValidation();
-
 export {
     editUserFormValidator,
     popupFigure,
