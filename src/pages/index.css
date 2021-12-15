@@ -43,3 +43,6 @@
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
+@import url(../blocks/like-wrapper/like-wrapper.css);
+@import url(../blocks/card/__num-likes/card__num-likes.css);
+@import url(../blocks/popup/__form/type/popup__form_type_delete-card.css);

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development",
-    "deploy":"gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Eduard-L/web_project_4/issues"
   },
-  "homepage":  "https://eduard-l.github.io/web_project_4/",
+  "homepage": "https://eduard-l.github.io/web_project_4/",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
@@ -38,6 +39,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
-    "core-js": "^3.19.1"
+    "core-js": "^3.19.1",
+    "regenerator-runtime": "^0.13.9"
   }
 }

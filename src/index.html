@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project_4_Around_The_US</title>
+    <title>Project_9_Around_The_US</title>
     <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
 
@@ -143,6 +143,22 @@
         </button>
       </div>
     </div>
+    <div class="popup popup_type_delete-card">
+      <div class="popup__content">
+      <h2 class="popup__title">Are you sure?</h2>
+      <form class="popup__form popup__form_type_delete-card" name="delete__card">
+      <button class="popup__close-button" type="button">
+        <img
+          src="./images/Close__button.svg"
+          alt="button for close the form"
+          class="popup__icon"
+          id="popup__icon_type_delete-card"
+        />
+      </button>
+      <button class="popup__save-button popup__save-button_type_delete-card" type="submit">Yes</button>
+    </form>
+    </div>
+    </div>
     <template id="template">
       <article class="card">
         <div class="image-wrapper">
@@ -155,8 +171,12 @@
         </div>
         <div class="card__content">
           <h2 class="card__title"></h2>
-          <button class="card__button" type="button"></button>
+          <div class="like-wrapper">
+          <button class="card__button" type="button"> </button>
+          <span class="card__num-likes"></span>
+          </div>
         </div>
+        
       </article>
     </template>
     <!-- <script type="module" src="./scripts/script.js"></script> -->

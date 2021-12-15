@@ -20,7 +20,7 @@ module.exports = {
   devServer: {
     static: path.resolve(__dirname, './dist'),
     compress: true,
-    port: 8080,
+    port: 3080,
     open: true
   },
   module: {
@@ -32,7 +32,7 @@ module.exports = {
         // all files must be processed by babel-loader
         loader: "babel-loader",
         // exclude the node_modules folder, we don't need to process files in it
-        exclude: "/node_modules/"
+        exclude: "/node_modules/",
       },
       {
         test: /\.css$/,
