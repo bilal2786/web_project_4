@@ -15,7 +15,8 @@ import profilePhotoSrc from '../images/spartna__image.jpg';
 import profileIconEditButton from '../images/logo__button.svg';
 import addButtonImgSrc from '../images/Add__button.svg'
 import popupCloseIconSrc from '../images/Close__button.svg';
-import { ids } from "webpack";
+import { data } from "autoprefixer";
+
 const logoHeader = document.getElementById('header__logo');// find the logo 
 logoHeader.src = logoHeaderSrc; // add the src to the DOM element
 const profilePhoto = document.getElementById('profile__photo');
@@ -49,7 +50,8 @@ const popupFigure = document.querySelector(".popup__figure");
 const cardImage = document.querySelector(".popup__image");
 const formTypeEditProfile = popupTypeEditProfile.querySelector('.popup__form');
 const formtypeAddCard = popupTypeAddCard.querySelector('.popup__form');
-const popupConfirmation = document.querySelector('.popup_type_delete-card')
+const popupConfirmation = document.querySelector('.popup_type_delete-card');
+
 
 const pageSettings = {
     inputSelector: ".popup__input",
@@ -66,12 +68,18 @@ const api = new Api({//API instance
 
 const editProfilePopup = new PopupWithForm(".popup_type_edit-profile", saveUserInfo);//instances for Forms
 const addCardForm = new PopupWithForm(".popup_type_add-card", submitAddCardForm);
-// const deleteCardPopup = new PopupWithForm(".popup_type_delete-card", deleteTheCard);
-// deleteCardPopup.setEventListeners();
+const deleteCardPopup = new PopupWithForm(".popup_type_delete-card", deleteTheCard);
 
-// function deleteTheCard(evt) {
-//     evt.preventDefault();
-// }
+deleteCardPopup.setEventListeners();
+function deleteTheCard(evt) {
+    evt.preventDefault();
+    console.log(evt.target)
+    // const card = createCard(cardInfo)
+    // card.deleteCard();
+    // deleteCard();
+
+}
+
 
 editButton.addEventListener('click', () => {
     editProfilePopup.open();
@@ -123,16 +131,10 @@ const cardRender = new Section({
 async function submitAddCardForm(event) { ////function for submit new card 
     event.preventDefault();
     try {
-        const response = await api.uploadCard(inputCardTitle.value, inputUrl.value)
-        if (response) {
-            console.log(response.owner._id)
-            const cardElement = createCard({
-                name: response.name,
-                link: response.link,
-                likes: response.likes,
+        const data = await api.uploadCard(inputCardTitle.value, inputUrl.value)
+        if (data) {
 
-
-            });
+            const cardElement = createCard(data);
             cardRender.addItem(cardElement);// place the card into the DOM
 
         }
@@ -187,10 +189,8 @@ export {
     profileName,
     profileDescription,
     popupConfirmation,
-
+    api
 };
-
-
 
 async function loadingThePage() {
     const [cards, userData] = await Promise.all([api.getInitialCards(), api.getUserData()])
@@ -199,6 +199,19 @@ async function loadingThePage() {
     infoAboutUser.setUserInfo({ name: userData.name, description: userData.about })
 }
 loadingThePage();
+async function deleteCard(cardId) {
+    try {
+        const response = await api.deleteCard(cardId);
+        if (response) {
+            console.log(response)
+        }
+    }
+    catch (e) {
+        console.log('there is an error with you connection', e)
+    }
+}
+
+
 
 
 

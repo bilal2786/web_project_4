@@ -75,6 +75,55 @@ export default class Api {
         }
         console.log(data);
     }
+    async deleteCard(cardId) {
+        const response = await fetch(`${this._url}/cards/${cardId}`, {
+            method: "DELETE",
+            headers: {
+                authorization: this._token,
 
+            }
+        })
+        if (response.ok) {
+            return response.json();
+
+        }
+        else {
+            console.log("something goes wrong from the backend", response.status, response.statusText)
+        }
+
+    }
+    async likeCard(cardId) {
+        const response = await fetch(`${this._url}/cards/${cardId}`, {
+            method: "PUT",
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+        })
+        if (response.ok) {
+            return response.json();
+
+        }
+        else {
+            console.log("something goes wrong from the backend", response.status, response.statusText)
+        }
+
+    }
 }
+
+    // async removeLikeCard(cardId){
+    //     const response=await fetch(`${ this._url } / cards / ${ cardId }`,{
+    //         method:"PUT" ,
+    //         headers: {
+    //           authorization: this._token,
+    //           "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify({
+
+    //       })
+    //       })
+    // }
+
+
+
 

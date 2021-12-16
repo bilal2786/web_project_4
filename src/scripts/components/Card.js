@@ -1,4 +1,4 @@
-import { popupFigure, cardImage, popupConfirmation, deleteCardPopup } from "../script.js";
+import { popupFigure, cardImage, popupConfirmation, deleteCardPopup, api } from "../script.js";
 
 export default class Card {
     constructor(data, templateElement, onImageClick) {
@@ -7,21 +7,26 @@ export default class Card {
         this._templateElement = templateElement;
         this._onImageClick = onImageClick;
         this._likes = data.likes
-        this._id = data.owner._id
+        this._ownerId = data.owner._id
+        this._cardId = data._id
 
     }
 
     _handlePreviewImage() {
         this._onImageClick({ link: this._link, name: this._name });
     }
+    async _likeCard() {
+        await api.likeCard(this._cardId);
+    }
 
     _setEventListeners() {
         const cardButton = this._cardElement.querySelector(".card__button");
-        const deleteButton = this._cardElement.querySelector(".card__delete-button");
+        const deleteButton = this._cardElement.querySelector('.card__delete-button')
 
         cardButton.addEventListener('click', (evt) => { /// func for all like buttons !
 
             evt.target.classList.toggle(`card__button_black`);
+            this._likeCard();
 
         });
 
@@ -30,12 +35,9 @@ export default class Card {
 
             // this._cardElement.remove();
             popupConfirmation.classList.add('popup_visible')
-            // const cardTrashIconElement = deleteButton.closest('.card')
-            // return cardTrashIconElement;
-
-
-
-
+            // // const cardTrashIconElement = deleteButton.closest('.card')
+            // // return cardTrashIconElement;
+            // console.log(this._cardId);
         });
 
         this._cardElement.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 
@@ -55,15 +57,15 @@ export default class Card {
         else {
             this._cardElement.querySelector(".card__num-likes").style.display = "none";
         }
-        if (this._id !== "84f05771113e2a847b97f151") {
+        if (this._ownerId !== "84f05771113e2a847b97f151") {
             this._cardElement.querySelector(".card__delete-button").style.display = "none"
         }
-
-
-
 
         this._setEventListeners();
 
         return this._cardElement;
+    }
+    deletingCard() {
+        this._cardElement.remove();
     }
 }
