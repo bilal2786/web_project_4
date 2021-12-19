@@ -15,12 +15,10 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img
-            src="./images/spartna__image.jpg"
-            alt="photo of the profile"
-            class="profile__photo"
-            id="profile__photo"
-          />
+          
+          <div class=profile__photo> 
+          <button class=profile__edit-img-button></button>
+        </div>
           <div class="profile__info">
             <h1 class="profile__name">Spartan</h1>
             <button class="profile__edit-button" type="button">
@@ -156,6 +154,31 @@
         />
       </button>
       <button class="popup__save-button popup__save-button_type_delete-card" type="submit">Yes</button>
+    </form>
+    </div>
+    </div>
+    <div class="popup popup_type_edit-profile-img">
+      <div class="popup__content">
+      <h2 class="popup__title">Change profile picture</h2>
+      <form class="popup__form popup__form_type_edit-profile-img" name="delete__card">
+        <input
+              type="url"
+              id="input_type_url_edit-img"
+              class="popup__input popup__input_type_url"
+              name="profile-pic__url"
+              placeholder="Enter your profile photo URL"
+              required
+            />
+            <span id="input_type_url-photo-error" class="popup__error"></span>
+      <button class="popup__close-button" type="button">
+        <img
+          src="./images/Close__button.svg"
+          alt="button for close the form"
+          class="popup__icon"
+          id="popup__icon_type_change-profile-pic"
+        />
+      </button>
+      <button class="popup__save-button" type="submit">Save</button>
     </form>
     </div>
     </div>

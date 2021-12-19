@@ -1,8 +1,9 @@
 export default class UserInfo {
-    constructor({ profileName, profileDescription }) {
+    constructor({ profileName, profileDescription, profilePic }) {
 
         this._profileName = profileName;
         this._profileDescription = profileDescription;
+        this._profilePic = profilePic;
 
     }
 
@@ -12,9 +13,10 @@ export default class UserInfo {
 
     }
 
-    setUserInfo({ name, description }) {
+    setUserInfo({ name, description, avatar }) {
         this._profileName.textContent = name;
         this._profileDescription.textContent = description;
+        this._profilePic.style.backgroundImage = "url(" + avatar + ")";
     }
 
 }

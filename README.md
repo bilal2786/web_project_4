@@ -1,4 +1,4 @@
-# Project 8: Around The U.S.
+# Project 9: Around The U.S.
 
 ## The project describes a sort of social media profile !
 
@@ -42,7 +42,15 @@
   - All the forms checking for the validation and inform the  user about it with default messages! (done with pure JS).
 -  The project is organized in Classes according to Object-Oriented programming.
 - The project contains Web Pack installed & all the coniguration for JSON package , Barbel config and Webpack config.
-
+- The project include working with the Api. 
+- All actions in the aplication incuding communication with the Server:
+  - get cads data from the server and placing them in DOM 
+  - get user data from the server 
+  - updating user data in the server 
+  - uploading new card 
+  - updating profile photo
+  - like/ dislike photo 
+  -the user can delete only cards that was uploaded by him/her according to the userID
 ---
 
 ## Future features

@@ -7,20 +7,18 @@ import Card from "./components/Card.js"
 import Section from "./components/Section.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import UserInfo from "./components/UserInfo";
+import DeletePopup from "./components/DeletePopup.js";
 
 import '../pages/index.css'
 // importing images 
 import logoHeaderSrc from '../images/logo1.svg'; // source of logo 
-import profilePhotoSrc from '../images/spartna__image.jpg';
 import profileIconEditButton from '../images/logo__button.svg';
 import addButtonImgSrc from '../images/Add__button.svg'
 import popupCloseIconSrc from '../images/Close__button.svg';
-import { data } from "autoprefixer";
-
 const logoHeader = document.getElementById('header__logo');// find the logo 
 logoHeader.src = logoHeaderSrc; // add the src to the DOM element
 const profilePhoto = document.getElementById('profile__photo');
-profilePhoto.src = profilePhotoSrc;
+// profilePhoto.src = profilePhotoSrc;
 const profileEditIcon = document.getElementById('profile__icon-edit-button');
 profileEditIcon.src = profileIconEditButton;
 const addButtonImg = document.getElementById('profile__icon-add-button');
@@ -33,6 +31,8 @@ const popupCloseIconZoomImg = document.getElementById('popup__icon_type_zoom-ima
 popupCloseIconZoomImg.src = popupCloseIconSrc
 const popupDeleteCard = document.getElementById('popup__icon_type_delete-card');
 popupDeleteCard.src = popupCloseIconSrc
+const popupCloseIconEditProfileImg = document.getElementById('popup__icon_type_change-profile-pic');
+popupCloseIconEditProfileImg.src = popupCloseIconSrc
 // variables 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -51,6 +51,12 @@ const cardImage = document.querySelector(".popup__image");
 const formTypeEditProfile = popupTypeEditProfile.querySelector('.popup__form');
 const formtypeAddCard = popupTypeAddCard.querySelector('.popup__form');
 const popupConfirmation = document.querySelector('.popup_type_delete-card');
+const numOfLikes = document.querySelector(".card__num-likes");
+const changeProfileImgPopup = document.querySelector('.popup_type_edit-profile-img');
+const buttonForEditImg = document.querySelector('.profile__edit-img-button');
+const profilePic = document.querySelector('.profile__photo');
+const inputUrlChangeProfileImg = changeProfileImgPopup.querySelector('.popup__input_type_url')
+const formTypeEditProfilePic = changeProfileImgPopup.querySelector('.popup__form')
 
 
 const pageSettings = {
@@ -60,26 +66,117 @@ const pageSettings = {
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible"
 }
-// 
-const api = new Api({//API instance
+//API instance
+const api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
     token: "61a577b5-41b8-4f4a-b2cc-045694a09d23"
 });
 
+
+//instances for Forms
 const editProfilePopup = new PopupWithForm(".popup_type_edit-profile", saveUserInfo);//instances for Forms
 const addCardForm = new PopupWithForm(".popup_type_add-card", submitAddCardForm);
-const deleteCardPopup = new PopupWithForm(".popup_type_delete-card", deleteTheCard);
-
-deleteCardPopup.setEventListeners();
-function deleteTheCard(evt) {
+const deleteCardPopup = new DeletePopup(".popup_type_delete-card", deleteCard);
+const changeProfilePicPopup = new PopupWithForm('.popup_type_edit-profile-img', submitProfilePic)
+// listeners for Forms
+deleteCardPopup.setEventListeners()
+changeProfilePicPopup.setEventListeners();
+// asynchrone Functions
+async function submitProfilePic(evt) {
     evt.preventDefault();
-    console.log(evt.target)
-    // const card = createCard(cardInfo)
-    // card.deleteCard();
-    // deleteCard();
+    try {
+        changeProfileImgPopup.querySelector('.popup__save-button').textContent = "Saving..."
+        const response = await api.updatingProfileImg(inputUrlChangeProfileImg.value);
+        if (response) {
+            profilePic.style.backgroundImage = "url(" + inputUrlChangeProfileImg.value + ")";
+            changeProfileImgPopup.querySelector('.popup__save-button').textContent = "Save"
+            console.log(response)
+        }
+    }
+    catch (e) {
+        console.log('the photo is not longer updated', e)
+
+    }
+
+    console.log('you are on the right way')
+    changeProfilePicPopup.close();
+}
+async function deleteCard(cardId) {
+
+    try {
+        const response = await api.deleteCard(cardId)
+        if (response) {
+            console.log(response)
+        }
+    }
+    catch (e) {
+        console.log('backend error ', e)
+        alert('the card wasnt deleted due to error')
+    }
+}
+async function addingLikes(cardId) {
+
+    try {
+        const response = await api.likeCard(cardId);
+        if (response) {
+            // console.log("see you like in the console", response.likes)
+            return response.likes;
+        }
+    }
+    catch (e) {
+        console.log("something went wrong with your backend", e)
+        alert("something went wrong with your like");
+    }
+}
+
+async function deletingLikes(cardId) {
+    try {
+        const response = await api.removeLikeCard(cardId)
+        if (response) {
+            console.log("see you like in the console", response.likes)
+            return response.likes;
+
+        }
+
+    }
+    catch (e) {
+        console.log("something went wrong", e)
+    }
 
 }
 
+
+async function submitAddCardForm(event) { ////function for submit new card 
+    event.preventDefault();
+    try {
+        popupTypeAddCard.querySelector('.popup__save-button').textContent = "Creation In Progres..."
+        const data = await api.uploadCard(inputCardTitle.value, inputUrl.value)
+        if (data) {
+
+            const cardElement = createCard(data);
+            cardRender.addItem(cardElement);// place the card into the DOM
+
+        }
+    }
+    catch (e) {
+        console.log("something went wrong with the backend", e)
+    }
+    finally {
+        popupTypeAddCard.querySelector('.popup__save-button').textContent = "Save"
+        addCardForm.close()
+    }
+
+}
+async function loadingThePage() {
+    const [cards, userData] = await Promise.all([api.getInitialCards(), api.getUserData()])
+    cardRender.renderItems(cards);
+    infoAboutUser.setUserInfo({ name: userData.name, description: userData.about, avatar: userData.avatar })
+}
+loadingThePage();
+// buttons handles
+buttonForEditImg.addEventListener('click', () => {
+    changeProfileImgPopup.classList.add('popup_visible')
+})
 
 editButton.addEventListener('click', () => {
     editProfilePopup.open();
@@ -95,12 +192,13 @@ addButton.addEventListener('click', () => {
     resetAndValidateAddCardForm();
 
 });
+// popup with image instance + handle events
+const imagePopup = new PopupWithImage('.popup_type_zoom-image');
+imagePopup.setEventListeners();
 
-const imagePopup = new PopupWithImage('.popup_type_zoom-image');// instance for popup of the image 
-imagePopup.setEventListeners();// set event handlers for it 
-
-function createCard(cardInfo) {// return card element
-    return new Card(cardInfo, elementTemplate, imagePopup.open).createCard();
+// card creation func.
+function createCard(cardInfo) {
+    return new Card(cardInfo, elementTemplate, imagePopup.open, addingLikes, deletingLikes, deleteCard).createCard();
 }
 
 const cardRender = new Section({
@@ -110,45 +208,8 @@ const cardRender = new Section({
     }
 }, ".cards")
 
-// cardRender.renderItems();//  add intial Cards to the DOM 
 
-// function submitAddCardForm(event) { ////function for submit new card 
-//     event.preventDefault();
-//     api.uploadCard(inputCardTitle.value, inputUrl.value)
-//         .then((data) => {
-//             if (data) {
-//                 const cardElement = createCard({
-//                     name: data.name,
-//                     link: data.link
-//                 });
-//                 cardRender.addItem(cardElement);// place the card into the DOM 
-//             }
-//         })
-//         .catch((err) => console.log("something went wrong", err))
-
-//         .finally(() => addCardForm.close())
-// }
-async function submitAddCardForm(event) { ////function for submit new card 
-    event.preventDefault();
-    try {
-        const data = await api.uploadCard(inputCardTitle.value, inputUrl.value)
-        if (data) {
-
-            const cardElement = createCard(data);
-            cardRender.addItem(cardElement);// place the card into the DOM
-
-        }
-    }
-    catch (e) {
-        console.log("something went wrong", e)
-    }
-    finally {
-        addCardForm.close()
-    }
-
-
-}
-
+//
 function fillEditProfileForm() { /// the function takes the text value from user info and make it appears at the input values of the popup form 
     const userInfo = infoAboutUser.getUserInfo();
     inputName.value = userInfo.name;
@@ -156,12 +217,26 @@ function fillEditProfileForm() { /// the function takes the text value from user
 
 }
 
-const infoAboutUser = new UserInfo({ profileName, profileDescription }); /// instance with the UserInfo
-function saveUserInfo(event) {
+const infoAboutUser = new UserInfo({ profileName, profileDescription, profilePic }); /// instance with the UserInfo
+
+async function saveUserInfo(event) {
     event.preventDefault();
-    api.updatingProfileInfo(inputName.value, inputDescription.value)
-    infoAboutUser.setUserInfo({ name: inputName.value, description: inputDescription.value });
-    editProfilePopup.close();
+    try {
+        popupTypeEditProfile.querySelector('.popup__save-button').textContent = "Saving..."
+        const userInfo = await api.updatingProfileInfo(inputName.value, inputDescription.value)
+        if (userInfo) {
+            infoAboutUser.setUserInfo({ name: userInfo.name, description: userInfo.about, avatar: userInfo.avatar });
+        }
+    }
+    catch (e) {
+        console.log("your info wasnt updated due to backend error", e)
+        alert('your info wasnt updated')
+    }
+    finally {
+        popupTypeEditProfile.querySelector('.popup__save-button').textContent = "Saving"
+        editProfilePopup.close();
+    }
+
 }
 
 function resetAndValidateAddCardForm() {
@@ -170,11 +245,14 @@ function resetAndValidateAddCardForm() {
 function resetAndValidateProfileInfo() {
     editUserFormValidator.resetValidation();
 }
-
-const editUserFormValidator = new FormValidator(pageSettings, formTypeEditProfile);// instance for the form validation for each form 
+// instance for the form validation
+const editUserFormValidator = new FormValidator(pageSettings, formTypeEditProfile);
 editUserFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(pageSettings, formtypeAddCard);
 addCardFormValidator.enableValidation();
+// const editProfilePhotoValidator = new FormValidator(pageSettings, formTypeEditProfilePic);
+// editProfilePhotoValidator.enableValidation();
+
 export {
     editUserFormValidator,
     popupFigure,
@@ -189,27 +267,9 @@ export {
     profileName,
     profileDescription,
     popupConfirmation,
+    deleteCardPopup,
     api
 };
-
-async function loadingThePage() {
-    const [cards, userData] = await Promise.all([api.getInitialCards(), api.getUserData()])
-    console.log(cards)
-    cardRender.renderItems(cards);
-    infoAboutUser.setUserInfo({ name: userData.name, description: userData.about })
-}
-loadingThePage();
-async function deleteCard(cardId) {
-    try {
-        const response = await api.deleteCard(cardId);
-        if (response) {
-            console.log(response)
-        }
-    }
-    catch (e) {
-        console.log('there is an error with you connection', e)
-    }
-}
 
 
 
