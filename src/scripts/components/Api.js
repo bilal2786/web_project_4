@@ -9,19 +9,27 @@ export default class Api {
             return response.json();
 
         }
-        else {
-            console.log("something goes wrong", response.status, response.statusText)
-        }
+
+        return Promise.reject(`something goes wrong: ${response.status} ${response.statusText}`);
+
+
     }
 
+
+
+
     async getInitialCards() {
+
         const response = await fetch(`${this._url}/cards`, {
             headers: {
                 authorization: this._token
             }
         })
-
         return this._checkResponse(response)
+
+
+
+
 
     }
 

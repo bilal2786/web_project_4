@@ -106,7 +106,7 @@ async function addingLikes(cardId) {
     try {
         const response = await api.likeCard(cardId);
         if (response) {
-            // console.log("see you like in the console", response.likes)
+            console.log("see you like in the console", response.likes)
             return response.likes;
         }
     }
