@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, templateElement, onImageClick, addingLikes, deletingLikes, openDeleteCardPopup) {
+    constructor(data, templateElement, onImageClick, addingLikes, deletingLikes, openDeleteCardPopup, infoAboutUser) {
         this._name = data.name;
         this._link = data.link;
         this._templateElement = templateElement;
@@ -10,6 +10,7 @@ export default class Card {
         this._addingLikes = addingLikes
         this._deletingLikes = deletingLikes
         this._openDeleteCardPopup = openDeleteCardPopup;
+        this._myId = infoAboutUser._profileId
     }
 
 
@@ -22,7 +23,7 @@ export default class Card {
     _checkingIfUserLikesCard() {
 
         this._likes.forEach((like) => {
-            if (like._id === "84f05771113e2a847b97f151") {
+            if (like._id === this._myId) {
                 this._cardElement.querySelector(".card__button").classList.add(`card__button_black`)
             }
         })
@@ -103,7 +104,7 @@ export default class Card {
         else {
             this._cardElement.querySelector(".card__num-likes").style.display = "none";
         }
-        if (this._ownerId !== "84f05771113e2a847b97f151") {
+        if (this._ownerId !== this._myId) {
             this._cardElement.querySelector(".card__delete-button").style.display = "none"
         }
 

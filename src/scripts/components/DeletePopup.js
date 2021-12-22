@@ -22,11 +22,5 @@ export default class DeletePopup extends Popup {
 
     }
 
-    open() {
-        super.open();
-
-    }
-
-
 
 }

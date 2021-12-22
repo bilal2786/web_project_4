@@ -1,7 +1,6 @@
 import "regenerator-runtime"
 import Api from "../scripts/components/Api";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
-// import initialCards from "./intial-cards.js"
 import FormValidator from "../scripts/components/FormValidator.js";
 import Card from "../scripts/components/Card.js"
 import Section from "../scripts/components/Section.js";
@@ -41,7 +40,7 @@ import {
     saveBtnForAddCard,
     saveBtnForEditProfile
 } from '../scripts/utils/constants'
-let myId
+
 //instances for Forms
 const editProfilePopup = new PopupWithForm(".popup_type_edit-profile", saveUserInfo);//instances for Forms
 const addCardForm = new PopupWithForm(".popup_type_add-card", submitAddCardForm);
@@ -61,16 +60,14 @@ function openDeleteCardPopup(cardElement, cardId) {
             const response = await api.deleteCard(cardId)
             if (response) {
                 cardElement.remove();
+                deleteCardPopup.close()
             }
         }
         catch (e) {
             console.log('backend error ', e)
             alert('the card wasnt deleted due to error')
         }
-        finally {
-            deleteCardPopup.close()
 
-        }
     })
 
 
@@ -83,8 +80,10 @@ async function submitProfilePic(evt) {
         saveButtonForPicProfile.textContent = "Saving..."
         const response = await api.updatingProfileImg(inputUrlChangeProfileImg.value);
         if (response) {
-            console.log(response)
-            profilePic.style.backgroundImage = "url(" + response.avatar + ")"
+            infoAboutUser.setUserInfo({ name: response.name, description: response.about, avatar: response.avatar, id: response._id })
+            profilePic.style.backgroundImage = "url(" + infoAboutUser._profilePic.style.backgroundImage + ")"
+            changeProfilePicPopup.close();
+
         }
     }
     catch (e) {
@@ -94,7 +93,7 @@ async function submitProfilePic(evt) {
     finally {
         saveButtonForPicProfile.textContent = "Save"
         console.log('you are on the right way')
-        changeProfilePicPopup.close();
+
     }
 
 }
@@ -143,7 +142,7 @@ async function submitAddCardForm(event) { ////function for submit new card
 
             const cardElement = createCard(data);
             cardRender.addItem(cardElement);// place the card into the DOM
-
+            addCardForm.close()
         }
     }
     catch (e) {
@@ -151,7 +150,7 @@ async function submitAddCardForm(event) { ////function for submit new card
     }
     finally {
         saveBtnForAddCard.textContent = "Save"
-        addCardForm.close()
+
     }
 
 }
@@ -159,8 +158,11 @@ async function loadingThePage() {
     try {
         const [cards, userData] = await Promise.all([api.getInitialCards(), api.getUserData()])
         if ([cards, userData]) {
-            cardRender.renderItems(cards);
+
             infoAboutUser.setUserInfo({ name: userData.name, description: userData.about, avatar: userData.avatar, id: userData._id })
+            cardRender.renderItems(cards);
+
+
         }
     }
     catch (e) {
@@ -214,7 +216,6 @@ function fillEditProfileForm() { /// the function takes the text value from user
 
 const infoAboutUser = new UserInfo({ profileName, profileDescription, profilePic }); /// instance with the UserInfo
 
-
 async function saveUserInfo(event) {
     event.preventDefault();
     try {
@@ -222,6 +223,7 @@ async function saveUserInfo(event) {
         const userInfo = await api.updatingProfileInfo(inputName.value, inputDescription.value)
         if (userInfo) {
             infoAboutUser.setUserInfo({ name: userInfo.name, description: userInfo.about, avatar: userInfo.avatar });
+            editProfilePopup.close();
         }
     }
     catch (e) {
@@ -230,7 +232,7 @@ async function saveUserInfo(event) {
     }
     finally {
         saveBtnForEditProfile.textContent = "Saving"
-        editProfilePopup.close();
+
     }
 
 }

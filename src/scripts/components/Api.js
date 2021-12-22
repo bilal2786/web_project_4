@@ -15,22 +15,13 @@ export default class Api {
     }
 
     async getInitialCards() {
-
         const response = await fetch(`${this._url}/cards`, {
             headers: {
                 authorization: this._token
             }
         })
 
-        if (response.ok) {
-            return response.json();
-
-        }
-        else {
-            console.log("something goes wrong", response.status, response.statusText)
-        }
-
-
+        return this._checkResponse(response)
 
     }
 
@@ -41,13 +32,8 @@ export default class Api {
                 authorization: this._token
             }
         })
-        if (response.ok) {
-            return response.json();
-        }
-        else {
-            console.log("something goes wrong")
-        }
 
+        return this._checkResponse(response)
 
     }
     async uploadCard(name, link) {
@@ -62,14 +48,8 @@ export default class Api {
                 link: link
             })
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log('something goes wrong')
-        }
-
+        return this._checkResponse(response)
 
     }
     async updatingProfileInfo(name, about) {
@@ -84,14 +64,8 @@ export default class Api {
                 about: about
             })
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log("something goes wrong", response.status, response.statusText)
-        }
-        console.log(data);
+        return this._checkResponse(response)
     }
     async updatingProfileImg(link) {
         const response = await fetch(`${this._url}/users/me/avatar`, {
@@ -105,14 +79,8 @@ export default class Api {
 
             })
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log("something goes wrong", response.status, response.statusText)
-        }
-        console.log(data);
+        return this._checkResponse(response)
     }
 
     async deleteCard(cardId) {
@@ -123,13 +91,8 @@ export default class Api {
 
             }
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log("something goes wrong from the backend", response.status, response.statusText)
-        }
+        return this._checkResponse(response)
 
     }
     async likeCard(cardId) {
@@ -140,14 +103,8 @@ export default class Api {
                 "Content-Type": "application/json"
             },
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log("something goes wrong from the backend", response.status, response.statusText)
-        }
-
+        return this._checkResponse(response)
     }
     async removeLikeCard(cardId) {
         const response = await fetch(`${this._url}/cards/likes/${cardId}`, {
@@ -158,14 +115,10 @@ export default class Api {
             },
 
         })
-        if (response.ok) {
-            return response.json();
 
-        }
-        else {
-            console.log("something goes wrong from the backend", response.status, response.statusText)
-        }
+        return this._checkResponse(response)
     }
+
 }
 
 
