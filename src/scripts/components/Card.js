@@ -1,8 +1,5 @@
-
-import { popupFigure, cardImage, popupConfirmation, deleteCardPopup, api } from "../script.js";
-
 export default class Card {
-    constructor(data, templateElement, onImageClick, addingLikes, deletingLikes, deleteCard) {
+    constructor(data, templateElement, onImageClick, addingLikes, deletingLikes, openDeleteCardPopup) {
         this._name = data.name;
         this._link = data.link;
         this._templateElement = templateElement;
@@ -12,10 +9,10 @@ export default class Card {
         this._cardId = data._id
         this._addingLikes = addingLikes
         this._deletingLikes = deletingLikes
-        this._deleteCard = deleteCard
-
-
+        this._openDeleteCardPopup = openDeleteCardPopup;
     }
+
+
 
     _checkAmountOfLikes(likes) {
 
@@ -23,6 +20,7 @@ export default class Card {
 
     }
     _checkingIfUserLikesCard() {
+
         this._likes.forEach((like) => {
             if (like._id === "84f05771113e2a847b97f151") {
                 this._cardElement.querySelector(".card__button").classList.add(`card__button_black`)
@@ -37,37 +35,54 @@ export default class Card {
     _setEventListeners() {
         const cardButton = this._cardElement.querySelector(".card__button");
         const deleteButton = this._cardElement.querySelector('.card__delete-button')
+        deleteButton.addEventListener('click', (evt) => { /// deleting cars func !
 
+            this._openDeleteCardPopup(this._cardElement, this._cardId);
+
+
+        });
         cardButton.addEventListener('click', async (evt) => { /// func for all like buttons !
 
             if (!cardButton.classList.contains('card__button_black')) {
-                const likes = await this._addingLikes(this._cardId)
-                this._checkAmountOfLikes(likes)
-                evt.target.classList.add(`card__button_black`);
-                this._cardElement.querySelector(".card__num-likes").style.display = "block"
-                this._cardElement.querySelector(".card__num-likes").textContent = this._numLikes;
+                try {
+                    const likes = await this._addingLikes(this._cardId)
+                    if (likes) {
+                        this._checkAmountOfLikes(likes)
+                        evt.target.classList.add(`card__button_black`);
+                        this._cardElement.querySelector(".card__num-likes").style.display = "block"
+                        this._cardElement.querySelector(".card__num-likes").textContent = this._numLikes;
+                    }
+                }
+                catch (e) {
+                    alert("your like didnt work")
+                    console.log('like didnt update', e)
+                }
+
             }
             else {
-                const likes = await this._deletingLikes(this._cardId);
-                evt.target.classList.remove(`card__button_black`);
-                this._checkAmountOfLikes(likes)
-                this._cardElement.querySelector(".card__num-likes").textContent = this._numLikes;
-                if (this._numLikes === 0) {
-                    this._cardElement.querySelector(".card__num-likes").style.display = "none"
+                try {
+                    const likes = await this._deletingLikes(this._cardId);
+                    if (likes) {
+                        evt.target.classList.remove(`card__button_black`);
+                        this._checkAmountOfLikes(likes)
+                        this._cardElement.querySelector(".card__num-likes").textContent = this._numLikes;
+                    }
                 }
-                else {
-                    this._cardElement.querySelector(".card__num-likes").style.display = "block"
+                catch (e) {
+                    alert("your like didnt work")
+                    console.log('like didnt update', e)
                 }
-
+                finally {
+                    if (this._numLikes === 0) {
+                        this._cardElement.querySelector(".card__num-likes").style.display = "none"
+                    }
+                    else {
+                        this._cardElement.querySelector(".card__num-likes").style.display = "block"
+                    }
+                }
             }
         });
 
-        deleteButton.addEventListener('click', (evt) => { /// deleting cars func !
-
-            deleteCardPopup.open(this._cardElement, this._cardId);
-
-
-        });
 
 
         this._cardElement.querySelector('.card__image').addEventListener('click', () => { ///event for image popup 

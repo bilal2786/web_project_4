@@ -2,21 +2,39 @@ export default class Api {
     constructor(options) {
         this._url = options.baseUrl
         this._token = options.token
+
+    }
+    _checkResponse(response) {
+        if (response.ok) {
+            return response.json();
+
+        }
+        else {
+            console.log("something goes wrong", response.status, response.statusText)
+        }
     }
 
     async getInitialCards() {
+
         const response = await fetch(`${this._url}/cards`, {
             headers: {
                 authorization: this._token
             }
         })
+
         if (response.ok) {
             return response.json();
+
         }
         else {
-            console.log("something goes wrong")
+            console.log("something goes wrong", response.status, response.statusText)
         }
+
+
+
     }
+
+
     async getUserData() {
         const response = await fetch(`${this._url}/users/me`, {
             headers: {

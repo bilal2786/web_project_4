@@ -8,15 +8,16 @@ export default class UserInfo {
     }
 
     getUserInfo() {
-        const infoAboutUser = { name: this._profileName.textContent, description: this._profileDescription.textContent }
+        const infoAboutUser = { name: this._profileName.textContent, description: this._profileDescription.textContent, avatar: this._profilePic, id: this._profileId }
         return infoAboutUser
 
     }
 
-    setUserInfo({ name, description, avatar }) {
+    setUserInfo({ name, description, avatar, id }) {
         this._profileName.textContent = name;
         this._profileDescription.textContent = description;
         this._profilePic.style.backgroundImage = "url(" + avatar + ")";
+        this._profileId = id;
     }
 
 }

@@ -11,7 +11,7 @@
   <body class="body">
     <div class="page-wrapper">
       <header class="header">
-        <img src="./images/logo1.svg" id="header__logo" alt="pic of logo" class="header__logo" />
+        <img src="<%=require('./images/logo1.svg')%>"  id="header__logo" alt="pic of logo" class="header__logo" />
       </header>
       <main class="main">
         <section class="profile">
@@ -22,22 +22,10 @@
           <div class="profile__info">
             <h1 class="profile__name">Spartan</h1>
             <button class="profile__edit-button" type="button">
-              <img
-                src="./images/logo__button.svg"
-                alt="logo of the button"
-                class="profile__icon-edit-button"
-                id="profile__icon-edit-button"
-              />
             </button>
             <p class="profile__description">Warrior</p>
           </div>
           <button class="profile__add-button" type="button">
-            <img
-              src="./images/Add__button.svg"
-              alt="button of adding info"
-              class="profile__icon-add-button"
-              id="profile__icon-add-button"
-            />
           </button>
         </section>
         <section class="cards"></section>
@@ -75,12 +63,6 @@
             <button class="popup__save-button" type="submit">Save</button>
           </form>
           <button class="popup__close-button" type="button">
-            <img
-              src="./images/Close__button.svg"
-              alt="button for close the form"
-              class="popup__icon"
-              id="popup__icon"
-            />
           </button>
         </div>
       </div>
@@ -113,12 +95,6 @@
             <button class="popup__save-button" type="submit">Save</button>
           </form>
           <button class="popup__close-button" type="button">
-            <img
-              src="./images/Close__button.svg"
-              alt="button for close the form"
-              class="popup__icon"
-              id="popup__icon_type_add-card"
-            />
           </button>
         </div>
       </div>
@@ -132,12 +108,6 @@
           class="popup__close-button popup__close-button_type_zoom-image"
           type="button"
         >
-          <img
-            src="./images/Close__button.svg"
-            alt="button for close the form"
-            class="popup__icon popup__icon_type_zoom-image"
-            id="popup__icon_type_zoom-image"
-          />
         </button>
       </div>
     </div>
@@ -146,12 +116,6 @@
       <h2 class="popup__title">Are you sure?</h2>
       <form class="popup__form popup__form_type_delete-card" name="delete__card">
       <button class="popup__close-button" type="button">
-        <img
-          src="./images/Close__button.svg"
-          alt="button for close the form"
-          class="popup__icon"
-          id="popup__icon_type_delete-card"
-        />
       </button>
       <button class="popup__save-button popup__save-button_type_delete-card" type="submit">Yes</button>
     </form>
@@ -163,20 +127,14 @@
       <form class="popup__form popup__form_type_edit-profile-img" name="delete__card">
         <input
               type="url"
-              id="input_type_url_edit-img"
+              id="input_type_url_photo"
               class="popup__input popup__input_type_url"
               name="profile-pic__url"
               placeholder="Enter your profile photo URL"
               required
             />
-            <span id="input_type_url-photo-error" class="popup__error"></span>
+            <span id="input_type_url_photo-error" class="popup__error"></span>
       <button class="popup__close-button" type="button">
-        <img
-          src="./images/Close__button.svg"
-          alt="button for close the form"
-          class="popup__icon"
-          id="popup__icon_type_change-profile-pic"
-        />
       </button>
       <button class="popup__save-button" type="submit">Save</button>
     </form>

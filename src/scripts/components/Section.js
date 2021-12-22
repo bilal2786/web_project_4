@@ -1,8 +1,8 @@
 export default class Section {
-    constructor({ render }, elementSelector) {
+    constructor({ render }, containerSelector) {
 
         this._render = render;// call back function for connection between classes 
-        this._elementSelector = document.querySelector(elementSelector);
+        this._container = document.querySelector(containerSelector);
     }
     renderItems(cards) {
         cards.forEach(element => {
@@ -11,6 +11,6 @@ export default class Section {
         });
     }
     addItem(element) {
-        this._elementSelector.append(element);
+        this._container.prepend(element);
     }
 }
