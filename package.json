@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eduard-L/web_project_4.git"
+    "url": "https://github.com/bilal2786/web_project_4.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Eduard-L/web_project_4/issues"
+    "url": "https://github.com/bilal2786/web_project_4/issues"
   },
-  "homepage": "https://eduard-l.github.io/web_project_4/",
+  "homepage": "https://bilal2786.github.io/web_project_4/",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",

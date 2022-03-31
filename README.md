@@ -1,72 +1,29 @@
-# Project 9: Around The U.S.
+# Project 4: Around The U.S. ---> sprint 9 
 
-## The project describes a sort of social media profile !
-
-**_The project contains_**
-
-- Profile Info
-
-  - Name
-  - Description
-
-- Images
-  - Images of a Profile
-
----
-
-## Html & CSS & JS techniques
-
-**_The project was done according figma design like in real tech job_**
-
-**The main techniques:**
-
-- BEM Methology & BEM file structure
-- Position Elements with: - Grid
-  - FLEX BOX
-  - Absolute & Fixed position
-    -Transitions of Elements by Hovering on it
-- The content is relativing to the most common screens sizes!
-  - 320px
-  - 768px
-  - 1024px
-  - 1280px
-- Form
-- Calc function
-- Interactiveness:
-  - The user can edit his profile info by clicking "Edit" button & save his info 
-  - The user can make like to the photo by clicking the "Like" button
-  - The user can add cards by insert title & url of the photo !
-  - The user can delete cards by cliking the "delete" button ! 
--Popup form Features:
-  -The popup can be closed by clicking outside of it or "Escape" key press! 
-  - All the forms checking for the validation and inform the  user about it with default messages! (done with pure JS).
--  The project is organized in Classes according to Object-Oriented programming.
-- The project contains Web Pack installed & all the coniguration for JSON package , Barbel config and Webpack config.
-- The project include working with the Api. 
-- All actions in the aplication incuding communication with the Server:
-  - get cads data from the server and placing them in DOM 
-  - get user data from the server 
-  - updating user data in the server 
-  - uploading new card 
-  - updating profile photo
-  - like/ dislike photo 
-  -the user can delete only cards that was uploaded by him/her according to the userID
----
-
-## Future features
-- Editing profile photo
+* Project 9: JS Asynchronous, API, Object Prototypes
+* Project 8: OOP Refactoring, more classes, and Webpack Bundling
+* Project 7: OOP and Modular JS, Card and FormValidator classes/objects
+* Project 6: Real time, client-side form validation
+* Project 5: JS functions to add, load, like, delete, and open full image on all cards
+* Project 4: Layout, Design, and JS Popup Functionality
 
 
----
+### Overview
+Project created with the following technologies
 
-link to the project ---> https://eduard-l.github.io/web_project_4/
+* Figma
+* HTML
+* CSS
+* Javascript 
 
----
+**Figma**
 
-![Practicum Logo](./images/readme_logo.svg)
+* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
 
----
+### First Project using JavaScript :) :)
+**Vist My Website**
+* [Link to the project ](https://bilal2786.github.io/web_project_4/)
 
-Made by ֲ©Loktev_Ed
 
-**_Enjoy!_**
+**HAVE FUN**
+
