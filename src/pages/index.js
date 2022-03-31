@@ -13,7 +13,7 @@ import '../pages/index.css'
 //API instance
 const api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
-    token: "61a577b5-41b8-4f4a-b2cc-045694a09d23"
+    token: "43053fb3-74fd-4383-af2c-059f614f6490"
 });
 // variables 
 import {
