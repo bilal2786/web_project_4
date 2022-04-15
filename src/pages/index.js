@@ -78,13 +78,7 @@ async function submitProfilePic(evt) {
     evt.preventDefault();
     try {
         saveButtonForPicProfile.textContent = "Saving..."
-        const response = await api.updatingProfileImg(inputUrlChangeProfileImg.value);
-        if (response) {
-            infoAboutUser.setUserInfo({ name: response.name, description: response.about, avatar: response.avatar, id: response._id })
-            profilePic.style.backgroundImage = "url(" + infoAboutUser._profilePic.style.backgroundImage + ")"
-            changeProfilePicPopup.close();
-
-        }
+        api.updatingProfileImg(inputUrlChangeProfileImg["profile__photo"]);
     }
     catch (e) {
         console.log('the photo is not longer updated', e)
@@ -137,9 +131,8 @@ async function submitAddCardForm(event) { ////function for submit new card
     event.preventDefault();
     try {
         saveBtnForAddCard.textContent = "Creation In Progres..."
-        const data = await api.uploadCard(inputCardTitle.value, inputUrl.value)
+        const data = await api.uploadCard()
         if (data) {
-
             const cardElement = createCard(data);
             cardRender.addItem(cardElement);// place the card into the DOM
             addCardForm.close()
@@ -220,7 +213,7 @@ async function saveUserInfo(event) {
     event.preventDefault();
     try {
         saveBtnForEditProfile.textContent = "Saving..."
-        const userInfo = await api.updatingProfileInfo(inputName.value, inputDescription.value)
+        const userInfo = await api.updatingProfileInfo()
         if (userInfo) {
             infoAboutUser.setUserInfo({ name: userInfo.name, description: userInfo.about, avatar: userInfo.avatar });
             editProfilePopup.close();
