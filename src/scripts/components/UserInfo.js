@@ -13,11 +13,11 @@ export default class UserInfo {
 
     }
 
-    setUserInfo({ name, description, avatar, id }) {
+    setUserInfo({ name, description, avatar, _id }) {
         this._profileName.textContent = name;
         this._profileDescription.textContent = description;
         this._profilePic.style.backgroundImage = "url(" + avatar + ")";
-        this._profileId = id;
+        this._profileId = _id;
     }
 
 }

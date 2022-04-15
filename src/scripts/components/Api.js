@@ -36,9 +36,9 @@ export default class Api {
 
     async getUserData() {
         const response = await fetch(`${this._url}/users/me`, {
-            headers: {
-                authorization: this._token
-            }
+            headers: this._headers 
+
+          
         })
 
         return this._checkResponse(response)

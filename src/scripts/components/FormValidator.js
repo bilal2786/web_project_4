@@ -49,8 +49,8 @@ class FormValidator {
 
     }
     _setEventListeners() {
-        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); //find all inputs in our page and creating an array !
-        const buttonElement = this._formElement.querySelector(this._submitButtonSelector); // find all symbit button in our page & creating array ! 
+        this._inputList = [...this._formElement.querySelectorAll(this._inputSelector)];
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
         this._toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => { //for all input element add event and check validity & toggle button according the validity 
